@@ -31,6 +31,7 @@ const CurrencyProvider = (props: ProviderProps) => {
         setRates(makeRatesMatrix(data));
       } catch (error) {
         console.log(error);
+        setIsError(true);
       }
     };
     setIsError(false);
