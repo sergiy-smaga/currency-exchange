@@ -1,15 +1,18 @@
-import './App.css';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { CurrencySelect } from './components/CurrencySelect';
 import { CurrencyInput } from './components/CurrencyInput';
 import { ArrowsButton } from './components/ArrowsButton';
 import { TableRow } from './components/TableRow';
 import { TableHeader } from './components/TableHeader';
-import { IItem } from './types';
-import { Grid } from '@mui/material';
 import { useCurrencyContext } from './context/CurrencyContext';
 import { CurrencyOutput } from './components/CurrencyOutput';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { IItem } from './types';
 
 const boxStyles = {
   background: '#fdfdfd',
@@ -22,30 +25,57 @@ const boxStyles = {
 };
 
 function App() {
-  const { fromCurrency, setFromCurrency, toCurrency, setToCurrency, rates } =
-    useCurrencyContext();
+  const {
+    fromCurrency,
+    setFromCurrency,
+    toCurrency,
+    setToCurrency,
+    rates,
+    isError,
+  } = useCurrencyContext();
 
   return (
-    <Container maxWidth="md" sx={boxStyles}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs: 2 }}>
-          <TableHeader />
-          {rates.length &&
-            rates.map((item: IItem, index: number) => (
-              <TableRow key={index} item={item} />
-            ))}
-        </Grid>
-      </Box>
+    <Container
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <CssBaseline />
 
-      <Box mt={4} sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs: 2 }}>
-          <CurrencyInput />
-          <CurrencySelect value={fromCurrency} setValue={setFromCurrency} />
-          <ArrowsButton />
-          <CurrencyOutput />
-          <CurrencySelect value={toCurrency} setValue={setToCurrency} />
-        </Grid>
-      </Box>
+      <Header />
+
+      <Container maxWidth="md" sx={boxStyles}>
+        {isError ? (
+          <Typography sx={{ color: 'red' }} variant="h2">
+            Server Error Happened
+          </Typography>
+        ) : (
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={{ xs: 2 }}>
+              <TableHeader />
+              {rates.length &&
+                rates.map((item: IItem, index: number) => (
+                  <TableRow key={index} item={item} />
+                ))}
+            </Grid>
+          </Box>
+        )}
+
+        <Box mt={4} sx={{ flexGrow: 1 }}>
+          <Grid container spacing={{ xs: 2 }}>
+            <CurrencyInput />
+            <CurrencySelect value={fromCurrency} setValue={setFromCurrency} />
+            <ArrowsButton />
+            <CurrencyOutput />
+            <CurrencySelect value={toCurrency} setValue={setToCurrency} />
+          </Grid>
+        </Box>
+      </Container>
+
+      <Footer />
     </Container>
   );
 }

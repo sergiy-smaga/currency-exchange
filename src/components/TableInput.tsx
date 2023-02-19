@@ -13,11 +13,8 @@ import { IItem, TableInputProps } from '../types';
 
 const Item = styled(Paper)(({ theme }) => ({
   position: 'relative',
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(2),
   textAlign: 'center',
-  color: theme.palette.text.secondary,
 }));
 
 export const TableInput: React.FC<TableInputProps> = ({ item, rateType }) => {
@@ -79,7 +76,6 @@ export const TableInput: React.FC<TableInputProps> = ({ item, rateType }) => {
       ) : (
         <OutlinedInput
           autoFocus
-          size="small"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           type="number"

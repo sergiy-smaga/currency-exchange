@@ -40,6 +40,7 @@ export type IContext = {
   toCurrency: number;
   firstAmount: string;
   rates: IItem[];
+  isError: boolean;
 };
 
 export type SelectProps = {
