@@ -16,6 +16,7 @@ export const CurrencySelect: React.FC<SelectProps> = ({ value, setValue }) => {
       <FormControl fullWidth>
         <InputLabel>Currency</InputLabel>
         <Select
+          data-testid="currency"
           value={value.toString()}
           label="Currency"
           onChange={handleChange}

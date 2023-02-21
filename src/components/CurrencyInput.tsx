@@ -14,6 +14,7 @@ export const CurrencyInput = () => {
         InputProps={{
           type: 'number',
         }}
+        inputProps={{ 'data-testid': 'currency-input' }}
       />
     </Grid>
   );

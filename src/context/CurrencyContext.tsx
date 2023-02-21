@@ -35,8 +35,8 @@ const CurrencyProvider = (props: ProviderProps) => {
       }
     };
     setIsError(false);
-    fetchData();
     setCounter((prev) => prev + 1);
+    fetchData();
   }, []);
 
   useEffect(() => {

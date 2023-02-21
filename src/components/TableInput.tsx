@@ -10,6 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useCurrencyContext } from '../context/CurrencyContext';
 import { IItem, TableInputProps } from '../types';
+import { validateInput } from '../helpers/validateInput';
 
 const Item = styled(Paper)(({ theme }) => ({
   position: 'relative',
@@ -38,11 +39,7 @@ export const TableInput: React.FC<TableInputProps> = ({ item, rateType }) => {
   }, [item, rate, rateType, setRates]);
 
   useEffect(() => {
-    if (Number(value) > rate * 1.1 || Number(value) < rate * 0.9) {
-      setIsIconDisabled(true);
-    } else {
-      setIsIconDisabled(false);
-    }
+    setIsIconDisabled(validateInput(rate, value));
   }, [rate, value]);
 
   const handleDoneClick = () => {
